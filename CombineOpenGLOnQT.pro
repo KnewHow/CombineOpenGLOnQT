@@ -12,11 +12,11 @@ CONFIG += c++11
 
 
 SOURCES += \
-    src/main.cpp \
-    src/widget.cpp
+    src/cpps/main.cpp \
+    src/cpps/widget.cpp
 
 HEADERS += \
-    src/widget.h
+    src/includes/widget.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
