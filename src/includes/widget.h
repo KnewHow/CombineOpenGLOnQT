@@ -24,6 +24,7 @@ private:
     QVector<float> vertices;
     QVector<unsigned int> indices;
     QOpenGLBuffer VBO;
+    QOpenGLBuffer IBO;
     QOpenGLVertexArrayObject VAO;
 };
 
