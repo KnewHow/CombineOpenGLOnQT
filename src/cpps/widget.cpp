@@ -1,5 +1,7 @@
 #include "../includes/widget.h"
 #include <QSurfaceFormat>
+#include <QtMath>
+#include <QtDebug>
 
 
 Widget::Widget(QWidget *parent)
@@ -17,6 +19,9 @@ Widget::Widget(QWidget *parent)
          0.5f,  0.5f, 0.0f,     1.0f, 1.0f,   // 右上
        };
 
+       timer.setInterval(18);
+       connect(&timer,&QTimer::timeout,this,static_cast<void (Widget::*)()>(&Widget::update));
+       timer.start();
 }
 
 Widget::~Widget(){
@@ -73,12 +78,19 @@ void Widget::paintGL() {
     this->glClear(GL_COLOR_BUFFER_BIT);
     shaderProgram.bind();
     {
+        float millSeconds = QTime::currentTime().msecsSinceStartOfDay() / 1000.0f;
+        QMatrix4x4 trans;
+        trans.translate(0.0f, 0.5 * qAbs(qSin(millSeconds)), 0.0);
+        trans.scale(0.5 * qAbs(qSin(millSeconds)), 0.5 * qAbs(qSin(millSeconds)));
+        trans.rotate(360.0f * millSeconds, 0.0f, 0.0f, -1.0f);
+        shaderProgram.setUniformValue("trans", trans);
         QOpenGLVertexArrayObject::Binder{&VAO};
         texture1.bind(0);
         shaderProgram.setUniformValue("texture_color1", 0);
         texture2.bind(1);
         shaderProgram.setUniformValue("texture_color2", 1);
         this->glDrawArrays(GL_POLYGON, 0, 4);
+        qInfo() << "millSeconds: " << millSeconds;
     }
 
 }

@@ -7,6 +7,8 @@
 #include <QOpenGLBuffer>
 #include <QOpenGLVertexArrayObject>
 #include <QOpenGLTexture>
+#include <QTime>
+#include <QTimer>
 
 class Widget : public QOpenGLWidget,public QOpenGLExtraFunctions
 {
@@ -28,6 +30,7 @@ private:
     QOpenGLVertexArrayObject VAO;
     QOpenGLTexture texture1;
     QOpenGLTexture texture2;
+    QTimer timer;
 
 };
 
