@@ -19,7 +19,10 @@ Widget::Widget(QWidget *parent)
 
 }
 
-Widget::~Widget(){}
+Widget::~Widget(){
+    texture1.destroy();
+    texture2.destroy();
+}
 
 void Widget::initializeGL() {
     this->initializeOpenGLFunctions();
