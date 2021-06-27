@@ -12,16 +12,65 @@ Widget::Widget(QWidget *parent)
 {
 
     vertices = {
-        // 位置                  //纹理坐标
-         0.5f, -0.5f, 0.0f,     1.0f, 0.0f,   // 右下
-        -0.5f, -0.5f, 0.0f,     0.0f, 0.0f,   // 左下
-        -0.5f,  0.5f, 0.0f,     0.0f, 1.0f,   // 左下
-         0.5f,  0.5f, 0.0f,     1.0f, 1.0f,   // 右上
-       };
+        -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+        0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
+        0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+        0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+       -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+       -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
 
-       timer.setInterval(18);
-       connect(&timer,&QTimer::timeout,this,static_cast<void (Widget::*)()>(&Widget::update));
-       timer.start();
+       -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+        0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+        0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+        0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+       -0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
+       -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+
+       -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+       -0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+       -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+       -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+       -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+       -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+        0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+        0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+        0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+        0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+        0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+        0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+       -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+        0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
+        0.5f, -0.5f,  0.5f,  1.0f, 1.0f,
+        0.5f, -0.5f,  0.5f,  1.0f, 1.0f,
+       -0.5f, -0.5f,  0.5f,  0.0f, 1.0f,
+       -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+
+       -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+        0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+        0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+        0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+       -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
+       -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
+    };
+
+    cubePositions = {
+         { 0.0f,  0.0f,  0.0f  },
+         { 2.0f,  5.0f, -15.0f },
+         {-1.5f, -2.2f, -2.5f  },
+         {-3.8f, -2.0f, -12.3f },
+         { 2.4f, -0.4f, -3.5f  },
+         {-1.7f,  3.0f, -7.5f  },
+         { 1.3f, -2.0f, -2.5f  },
+         { 1.5f,  2.0f, -2.5f  },
+         { 1.5f,  0.2f, -1.5f  },
+         {-1.3f,  1.0f, -1.5f  }
+    };
+
+    timer.setInterval(18);
+    connect(&timer,&QTimer::timeout,this,static_cast<void (Widget::*)()>(&Widget::update));
+    timer.start();
 }
 
 Widget::~Widget(){
@@ -67,6 +116,8 @@ void Widget::initializeGL() {
     texture2.setMinMagFilters(QOpenGLTexture::LinearMipMapLinear, QOpenGLTexture::Linear);
     texture2.setWrapMode(QOpenGLTexture::DirectionS, QOpenGLTexture::Repeat);
     texture2.setWrapMode(QOpenGLTexture::DirectionT, QOpenGLTexture::Repeat);
+
+    this->glEnable(GL_DEPTH_TEST);
 }
 
 void Widget::resizeGL(int w, int h) {
@@ -75,21 +126,32 @@ void Widget::resizeGL(int w, int h) {
 
 void Widget::paintGL() {
     this->glClearColor(0.1f, 0.5f, 0.7f, 1.0f);
-    this->glClear(GL_COLOR_BUFFER_BIT);
+    this->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     shaderProgram.bind();
     {
         float millSeconds = QTime::currentTime().msecsSinceStartOfDay() / 1000.0f;
-        QMatrix4x4 trans;
-        trans.translate(0.0f, 0.5 * qAbs(qSin(millSeconds)), 0.0);
-        trans.scale(0.5 * qAbs(qSin(millSeconds)), 0.5 * qAbs(qSin(millSeconds)));
-        trans.rotate(360.0f * millSeconds, 0.0f, 0.0f, -1.0f);
-        shaderProgram.setUniformValue("trans", trans);
         QOpenGLVertexArrayObject::Binder{&VAO};
         texture1.bind(0);
         shaderProgram.setUniformValue("texture_color1", 0);
         texture2.bind(1);
         shaderProgram.setUniformValue("texture_color2", 1);
-        this->glDrawArrays(GL_POLYGON, 0, 4);
+
+        QMatrix4x4 view;
+        view.translate(0.0, 0.0, -3.0);
+        shaderProgram.setUniformValue("view", view);
+
+        QMatrix4x4 projection;
+        projection.perspective(45.0, width()/(float)height(), 0.1, 100);
+        shaderProgram.setUniformValue("projection", projection);
+
+        for(int i = 0; i < cubePositions.size(); i++) {
+            QMatrix4x4 model;
+            model.translate(cubePositions[i]);
+            model.rotate(180*millSeconds + i * 20, QVector3D(1.0, 0.5, 0.3));
+            shaderProgram.setUniformValue("model", model);
+            this->glDrawArrays(GL_TRIANGLES, 0, 36);
+        }
+
         qInfo() << "millSeconds: " << millSeconds;
     }
 

@@ -26,6 +26,7 @@ private:
     QOpenGLShaderProgram shaderProgram;
     QVector<float> vertices;
     QVector<unsigned int> indices;
+    QVector<QVector3D> cubePositions;
     QOpenGLBuffer VBO;
     QOpenGLVertexArrayObject VAO;
     QOpenGLTexture texture1;
