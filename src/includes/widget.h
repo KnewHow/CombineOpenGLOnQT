@@ -6,6 +6,7 @@
 #include <QOpenGLShaderProgram>
 #include <QOpenGLBuffer>
 #include <QOpenGLVertexArrayObject>
+#include <QOpenGLTexture>
 
 class Widget : public QOpenGLWidget,public QOpenGLExtraFunctions
 {
@@ -24,8 +25,10 @@ private:
     QVector<float> vertices;
     QVector<unsigned int> indices;
     QOpenGLBuffer VBO;
-    QOpenGLBuffer IBO;
     QOpenGLVertexArrayObject VAO;
+    QOpenGLTexture texture1;
+    QOpenGLTexture texture2;
+
 };
 
 #endif // WIDGET_H

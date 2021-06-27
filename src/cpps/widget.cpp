@@ -5,28 +5,17 @@
 Widget::Widget(QWidget *parent)
     : QOpenGLWidget(parent),
       VBO(QOpenGLBuffer::VertexBuffer),
-      IBO(QOpenGLBuffer::IndexBuffer)
+      texture1(QOpenGLTexture::Target2D),
+      texture2(QOpenGLTexture::Target2D)
 {
 
-//    QSurfaceFormat format;
-//    format.setAlphaBufferSize(24);
-//    format.setMajorVersion(4);
-//    format.setMinorVersion(5);
-//    format.setProfile(QSurfaceFormat::OpenGLContextProfile::CompatibilityProfile);
-//    format.setSamples(10);
-//    this->setFormat(format);
-
     vertices = {
-        0.5f, 0.5f, 0.0f,   // 右上角
-        0.5f, -0.5f, 0.0f,  // 右下角
-       -0.5f, -0.5f, 0.0f, // 左下角
-       -0.5f, 0.5f, 0.0f   // 左上角
-    };
-
-    indices = {
-        0, 1, 3, // 第一个三角形
-        1, 2, 3  // 第二个三角形
-    };
+        // 位置                  //纹理坐标
+         0.5f, -0.5f, 0.0f,     1.0f, 0.0f,   // 右下
+        -0.5f, -0.5f, 0.0f,     0.0f, 0.0f,   // 左下
+        -0.5f,  0.5f, 0.0f,     0.0f, 1.0f,   // 左下
+         0.5f,  0.5f, 0.0f,     1.0f, 1.0f,   // 右上
+       };
 
 }
 
@@ -54,12 +43,22 @@ void Widget::initializeGL() {
     VBO.bind();
     VBO.allocate(vertices.data(), sizeof(float) * vertices.size());
 
-    IBO.create();
-    IBO.bind();
-    IBO.allocate(indices.data(), sizeof(unsigned int) * indices.size());
-
-    shaderProgram.setAttributeBuffer(0, GL_FLOAT, 0, 3, sizeof(float) * 3);
+    shaderProgram.setAttributeBuffer(0, GL_FLOAT, 0, 3, sizeof(float) * 5);
     shaderProgram.enableAttributeArray(0);
+    shaderProgram.setAttributeBuffer(1, GL_FLOAT, sizeof(float) * 3, 2, sizeof(float) * 5);
+    shaderProgram.enableAttributeArray(1);
+
+    texture1.create();
+    texture1.setData(QImage("/home/knewhow/dev/QTWorkspace/CombineOpenGLOnQT/Resources/texture/openglLogo.jpg").mirrored());
+    texture1.setMinMagFilters(QOpenGLTexture::LinearMipMapLinear, QOpenGLTexture::Linear);
+    texture1.setWrapMode(QOpenGLTexture::DirectionS, QOpenGLTexture::Repeat);
+    texture1.setWrapMode(QOpenGLTexture::DirectionT, QOpenGLTexture::Repeat);
+
+    texture2.create();
+    texture2.setData(QImage("/home/knewhow/dev/QTWorkspace/CombineOpenGLOnQT/Resources/texture/sea.jpg").mirrored());
+    texture2.setMinMagFilters(QOpenGLTexture::LinearMipMapLinear, QOpenGLTexture::Linear);
+    texture2.setWrapMode(QOpenGLTexture::DirectionS, QOpenGLTexture::Repeat);
+    texture2.setWrapMode(QOpenGLTexture::DirectionT, QOpenGLTexture::Repeat);
 }
 
 void Widget::resizeGL(int w, int h) {
@@ -72,7 +71,11 @@ void Widget::paintGL() {
     shaderProgram.bind();
     {
         QOpenGLVertexArrayObject::Binder{&VAO};
-        this->glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        texture1.bind(0);
+        shaderProgram.setUniformValue("texture_color1", 0);
+        texture2.bind(1);
+        shaderProgram.setUniformValue("texture_color2", 1);
+        this->glDrawArrays(GL_POLYGON, 0, 4);
     }
 
 }
