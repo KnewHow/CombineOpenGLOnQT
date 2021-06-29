@@ -94,10 +94,10 @@ void Camera::handle(QEvent *event) {
         }
 
         if(keys.contains(Qt::Key_A)) {
-            position -= QVector3D::crossProduct(position, up).normalized() * speed;
+            position += QVector3D::crossProduct(position, up).normalized() * speed;
         }
         if(keys.contains(Qt::Key_D)) {
-            position += QVector3D::crossProduct(position, up).normalized() * speed;
+            position -= QVector3D::crossProduct(position, up).normalized() * speed;
         }
 
         if(keys.contains(Qt::Key_Space)) {

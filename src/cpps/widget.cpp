@@ -13,47 +13,47 @@ Widget::Widget(QWidget *parent)
 {
 
     vertices = {
-        -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-        0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
-        0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-        0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-       -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-       -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+        0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+        0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+        0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+       -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+       -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
 
-       -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-        0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-        0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-        0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-       -0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
-       -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+       -0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+        0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+        0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+        0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+       -0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+       -0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
 
-       -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-       -0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-       -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-       -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-       -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-       -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+       -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+       -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+       -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+       -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+       -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+       -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
 
-        0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-        0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-        0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-        0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-        0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-        0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+        0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+        0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+        0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+        0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+        0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+        0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
 
-       -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-        0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
-        0.5f, -0.5f,  0.5f,  1.0f, 1.0f,
-        0.5f, -0.5f,  0.5f,  1.0f, 1.0f,
-       -0.5f, -0.5f,  0.5f,  0.0f, 1.0f,
-       -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+       -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+        0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+        0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+        0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+       -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+       -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
 
-       -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-        0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-        0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-        0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-       -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
-       -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
+       -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+        0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+        0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+        0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+       -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+       -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
     };
 
     cubePositions = {
@@ -81,19 +81,14 @@ Widget::~Widget(){
 
 void Widget::initializeGL() {
     this->initializeOpenGLFunctions();
-    QString verterShaderPath = "/home/knewhow/dev/QTWorkspace/CombineOpenGLOnQT/Resources/shader/vertex.glsl";
-    QString fragmentShaderPath = "/home/knewhow/dev/QTWorkspace/CombineOpenGLOnQT/Resources/shader/fragment.glsl";
-    if(!shaderProgram.addShaderFromSourceFile(QOpenGLShader::Vertex, verterShaderPath)) {
-        qDebug() << "Compile vertex shader Error: " << shaderProgram.log();
-    }
+    QString objVerterShaderPath = "/home/knewhow/dev/QTWorkspace/CombineOpenGLOnQT/Resources/shader/object/vertex.glsl";
+    QString objFragmentShaderPath = "/home/knewhow/dev/QTWorkspace/CombineOpenGLOnQT/Resources/shader/object/fragment.glsl";
+    compileShader(shaderProgram, objVerterShaderPath, objFragmentShaderPath);
 
-    if(!shaderProgram.addShaderFromSourceFile(QOpenGLShader::Fragment, fragmentShaderPath)) {
-        qDebug() << "Compile fragment shader Error: " << shaderProgram.log();
-    }
+    QString lightVerterShaderPath = "/home/knewhow/dev/QTWorkspace/CombineOpenGLOnQT/Resources/shader/light/vertex.glsl";
+    QString lightFragmentShaderPath = "/home/knewhow/dev/QTWorkspace/CombineOpenGLOnQT/Resources/shader/light/fragment.glsl";
+    compileShader(lightShaderProgram, lightVerterShaderPath, lightFragmentShaderPath);
 
-    if(!shaderProgram.link()) {
-        qDebug() << "Link shader Error: " << shaderProgram.log();
-    }
 
     QOpenGLVertexArrayObject::Binder{&VAO};
 
@@ -101,22 +96,13 @@ void Widget::initializeGL() {
     VBO.bind();
     VBO.allocate(vertices.data(), sizeof(float) * vertices.size());
 
-    shaderProgram.setAttributeBuffer(0, GL_FLOAT, 0, 3, sizeof(float) * 5);
+    shaderProgram.setAttributeBuffer(0, GL_FLOAT, 0, 3, sizeof(float) * 6);
     shaderProgram.enableAttributeArray(0);
-    shaderProgram.setAttributeBuffer(1, GL_FLOAT, sizeof(float) * 3, 2, sizeof(float) * 5);
+    shaderProgram.setAttributeBuffer(1, GL_FLOAT, sizeof(float) * 3, 3, sizeof(float) * 6);
     shaderProgram.enableAttributeArray(1);
 
-    texture1.create();
-    texture1.setData(QImage("/home/knewhow/dev/QTWorkspace/CombineOpenGLOnQT/Resources/texture/openglLogo.jpg").mirrored());
-    texture1.setMinMagFilters(QOpenGLTexture::LinearMipMapLinear, QOpenGLTexture::Linear);
-    texture1.setWrapMode(QOpenGLTexture::DirectionS, QOpenGLTexture::Repeat);
-    texture1.setWrapMode(QOpenGLTexture::DirectionT, QOpenGLTexture::Repeat);
-
-    texture2.create();
-    texture2.setData(QImage("/home/knewhow/dev/QTWorkspace/CombineOpenGLOnQT/Resources/texture/sea.jpg").mirrored());
-    texture2.setMinMagFilters(QOpenGLTexture::LinearMipMapLinear, QOpenGLTexture::Linear);
-    texture2.setWrapMode(QOpenGLTexture::DirectionS, QOpenGLTexture::Repeat);
-    texture2.setWrapMode(QOpenGLTexture::DirectionT, QOpenGLTexture::Repeat);
+    lightShaderProgram.setAttributeBuffer(0, GL_FLOAT, 0, 3, sizeof(float) * 6);
+    lightShaderProgram.enableAttributeArray(0);
 
     this->glEnable(GL_DEPTH_TEST);
 
@@ -128,37 +114,56 @@ void Widget::resizeGL(int w, int h) {
 }
 
 void Widget::paintGL() {
-    this->glClearColor(0.1f, 0.5f, 0.7f, 1.0f);
+    this->glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     this->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
     shaderProgram.bind();
-    {
-        float millSeconds = QTime::currentTime().msecsSinceStartOfDay() / 1000.0f;
-        QOpenGLVertexArrayObject::Binder{&VAO};
-        texture1.bind(0);
-        shaderProgram.setUniformValue("texture_color1", 0);
-        texture2.bind(1);
-        shaderProgram.setUniformValue("texture_color2", 1);
+    float millSeconds = QTime::currentTime().msecsSinceStartOfDay() / 1000.0f;
+    QOpenGLVertexArrayObject::Binder{&VAO};
 
-        shaderProgram.setUniformValue("view", camera.getView());
+    QMatrix4x4 model;
+    shaderProgram.setUniformValue("model", model);
 
-        QMatrix4x4 projection;
-        projection.perspective(45.0, width()/(float)height(), 0.1, 100);
-        shaderProgram.setUniformValue("projection", projection);
+    QMatrix4x4 projection;
+    projection.perspective(45.0, width()/(float)height(), 0.1, 100);
+    shaderProgram.setUniformValue("projection", projection);
+    shaderProgram.setUniformValue("view", camera.getView());
 
-        for(int i = 0; i < cubePositions.size(); i++) {
-            QMatrix4x4 model;
-            model.translate(cubePositions[i]);
-            model.rotate(180*millSeconds + i * 20, QVector3D(1.0, 0.5, 0.3));
-            shaderProgram.setUniformValue("model", model);
-            this->glDrawArrays(GL_TRIANGLES, 0, 36);
-        }
+    QVector3D lightColor(1.0f,1.0f,1.0f);
+    QVector3D objectColor(1.0f,0.5f,0.31f);
+    QVector3D lightPos(-4.0f,0.0f,0.5f);
 
-        qInfo() << "millSeconds: " << millSeconds;
-    }
+    shaderProgram.setUniformValue("viewerPos", camera.getPosition());
+    shaderProgram.setUniformValue("lightPos", lightPos);
+    shaderProgram.setUniformValue("objectColor", objectColor);
+    shaderProgram.setUniformValue("lightColor", lightColor);
+    this->glDrawArrays(GL_TRIANGLES, 0, 36);
+
+    lightShaderProgram.bind();
+    model.translate(lightPos);
+    model.scale(0.2);
+    lightShaderProgram.setUniformValue("model", model);
+    lightShaderProgram.setUniformValue("projection", projection);
+    lightShaderProgram.setUniformValue("view", camera.getView());
+    this->glDrawArrays(GL_TRIANGLES, 0, 36);
 }
 
 bool Widget::event(QEvent *e) {
     camera.handle(e);
     return QWidget::event(e);
+}
+
+void Widget::compileShader(QOpenGLShaderProgram& program, const QString &vertexShaderPath, const QString &fragmentShaderPath) {
+    if(!program.addShaderFromSourceFile(QOpenGLShader::Vertex, vertexShaderPath)) {
+        qDebug() << "Compile vertex shader Error: " << shaderProgram.log();
+    }
+
+    if(!program.addShaderFromSourceFile(QOpenGLShader::Fragment, fragmentShaderPath)) {
+        qDebug() << "Compile fragment shader Error: " << shaderProgram.log();
+    }
+
+    if(!program.link()) {
+        qDebug() << "Link shader Error: " << shaderProgram.log();
+    }
 }
 

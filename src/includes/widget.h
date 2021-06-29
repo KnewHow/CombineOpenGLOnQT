@@ -28,6 +28,7 @@ protected:
 
 private:
     QOpenGLShaderProgram shaderProgram;
+    QOpenGLShaderProgram lightShaderProgram;
     QVector<float> vertices;
     QVector<unsigned int> indices;
     QVector<QVector3D> cubePositions;
@@ -38,6 +39,8 @@ private:
     QTimer timer;
 
     Camera camera;
+
+    void compileShader(QOpenGLShaderProgram& program, const QString& vertexShaderPath, const QString& fragmentShaderPath);
 
 };
 
