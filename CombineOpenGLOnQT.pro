@@ -12,10 +12,12 @@ CONFIG += c++11
 
 
 SOURCES += \
+    src/cpps/camera.cpp \
     src/cpps/main.cpp \
     src/cpps/widget.cpp
 
 HEADERS += \
+    src/includes/camera.h \
     src/includes/widget.h
 
 # Default rules for deployment.

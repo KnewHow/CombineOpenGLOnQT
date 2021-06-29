@@ -8,7 +8,8 @@ Widget::Widget(QWidget *parent)
     : QOpenGLWidget(parent),
       VBO(QOpenGLBuffer::VertexBuffer),
       texture1(QOpenGLTexture::Target2D),
-      texture2(QOpenGLTexture::Target2D)
+      texture2(QOpenGLTexture::Target2D),
+      camera(this)
 {
 
     vertices = {
@@ -118,6 +119,8 @@ void Widget::initializeGL() {
     texture2.setWrapMode(QOpenGLTexture::DirectionT, QOpenGLTexture::Repeat);
 
     this->glEnable(GL_DEPTH_TEST);
+
+    camera.init();
 }
 
 void Widget::resizeGL(int w, int h) {
@@ -136,9 +139,7 @@ void Widget::paintGL() {
         texture2.bind(1);
         shaderProgram.setUniformValue("texture_color2", 1);
 
-        QMatrix4x4 view;
-        view.translate(0.0, 0.0, -3.0);
-        shaderProgram.setUniformValue("view", view);
+        shaderProgram.setUniformValue("view", camera.getView());
 
         QMatrix4x4 projection;
         projection.perspective(45.0, width()/(float)height(), 0.1, 100);
@@ -154,6 +155,10 @@ void Widget::paintGL() {
 
         qInfo() << "millSeconds: " << millSeconds;
     }
+}
 
+bool Widget::event(QEvent *e) {
+    camera.handle(e);
+    return QWidget::event(e);
 }
 

@@ -1,6 +1,8 @@
 #ifndef WIDGET_H
 #define WIDGET_H
 
+#include "camera.h"
+
 #include <QOpenGLWidget>
 #include <QOpenGLExtraFunctions>
 #include <QOpenGLShaderProgram>
@@ -9,6 +11,7 @@
 #include <QOpenGLTexture>
 #include <QTime>
 #include <QTimer>
+
 
 class Widget : public QOpenGLWidget,public QOpenGLExtraFunctions
 {
@@ -21,6 +24,7 @@ protected:
     virtual void initializeGL() override;
     virtual void resizeGL(int w,int h) override;
     virtual void paintGL() override;
+    virtual bool event(QEvent* e) override;
 
 private:
     QOpenGLShaderProgram shaderProgram;
@@ -32,6 +36,8 @@ private:
     QOpenGLTexture texture1;
     QOpenGLTexture texture2;
     QTimer timer;
+
+    Camera camera;
 
 };
 
