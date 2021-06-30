@@ -28,3 +28,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES += \
     Resources/shader/light/fragment.glsl \
     Resources/shader/light/vertex.glsl
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../../../usr/local/lib/release/ -lassimp
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../../../usr/local/lib/debug/ -lassimp
+else:unix: LIBS += -L$$PWD/../../../../../usr/local/lib/ -lassimp
+
+INCLUDEPATH += $$PWD/../../../../../usr/local/include/assimp
+DEPENDPATH += $$PWD/../../../../../usr/local/include/assimp
